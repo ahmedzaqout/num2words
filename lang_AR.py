@@ -19,6 +19,8 @@ from __future__ import division, unicode_literals
 from . import lang_EU
 
 
+
+
 class Num2Word_AR(lang_EU.Num2Word_EU):
     def set_high_numwords(self, high):
         max = 3 + 3 * len(high)
