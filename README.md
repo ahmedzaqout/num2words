@@ -1,19 +1,26 @@
 num2words - Convert numbers to words in multiple languages
 
-num2words is a library that converts numbers like 42 to words like forty-two. It supports multiple languages (English, French, Spanish, German and Lithuanian) and can even generate ordinal numbers like forty-second (altough this last feature is a bit buggy at the moment).
+num2words is a library that converts numbers like 42 to words like forty-two. It supports multiple languages (Arabic,English, French, Spanish, German and Lithuanian) and can even generate ordinal numbers like اثنان وأربعون .
 
 The project is hosted on https://github.com/ahmedzaqout/num2words
 
 Installation
 
-The easiest way to install num2words is to use clone:
+1-The easiest way to install num2words is to use clone:
 
 git clone https://github.com/ahmedzaqout/num2words.git
 
+2- install bidi
+
+pip install python-bidi
+
+3- install reshaper
+
+pip install git+https://github.com/mpcabd/python-arabic-reshaper
+
 Usage
 
-There's only one function to use:
-
+to use:
 
 >>>from bidi.algorithm import get_display
 >>>import arabic_reshaper
@@ -21,6 +28,10 @@ There's only one function to use:
 >>>from num2words import num2words
 >>>print get_display(arabic_reshaper.reshape(num2words(550,lang='ar')))
 خمسمائة وخمسون
+>>>print get_display(arabic_reshaper.reshape(num2words(100125,lang='ar')))
+مائة ألف ومائة وخمسة وعشرون
+
+
 
 
 
