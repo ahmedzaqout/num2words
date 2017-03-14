@@ -29,11 +29,12 @@ class Num2Word_AR(lang_EU.Num2Word_EU):
         for word, n in zip(high, range(max, 3, -3)):
             self.cards[10 ** n] = word + "مليون"
 
+
     def setup(self):
-        self.negword = "minus"
-        self.pointword = "point"
-        self.errmsg_nornum = "Only numbers may be converted to words."
-        self.exclude_title = ["و", "point", "و"]
+        self.negword = " سالب "
+        self.pointword = "."
+        self.errmsg_nornum = "فقط الارقام يمكن تحويلها الي كلمات."
+        self.exclude_title = ["و", ".", "و"]
 
         self.mid_numwords = [(1000, "ألف"), (100, "مائة"),
                              (1000000,"مليون"),
@@ -75,53 +76,46 @@ class Num2Word_AR(lang_EU.Num2Word_EU):
                      "twelve": "twelfth"}
 
     def merge(self, (ltext, lnum), (rtext, rnum)):
-        print "ltext"
-        print ltext
-        print "lnum"
-        print lnum
-        print "rtext"
-        print rtext
-        print "rnum"
-        print rnum
+    
 
         if lnum == 1 and rnum < 100:
             return (rtext, rnum)
-        if lnum == 1 and rnum == 100:
-            ltext = "مائة"
-            rtext = ""
-            return ("%s%s" % (ltext, rtext), lnum + rnum)
-        if lnum == 2 and rnum == 100:
+
+        if lnum == 1 and rnum >= 100:
+            ltext=""
+            
+	    return ("%s%s" % (ltext, rtext), lnum + rnum)
+
+
+
+      	if lnum == 2 and rnum == 100:
             ltext = "مائتان"
             rtext = ""
+	if lnum == 2 and rnum >= 1000:
+            ltext = ""
+            rtext = rtext+"ان"
             return ("%s%s" % (ltext, rtext), lnum + rnum)
-        if lnum == 3 and rnum == 100:
+
+            
+        if  ((3 <= lnum < 8 or lnum==9)  and rnum == 100):
             return ("%s%s" % (ltext[:-1], rtext), lnum + rnum)
-        if lnum == 4 and rnum == 100:
-            return ("%s%s" % (ltext[:-1], rtext), lnum + rnum)
-        if lnum == 5 and rnum == 100:
-            return ("%s%s" % (ltext[:-1], rtext), lnum + rnum)
-        if lnum == 6 and rnum == 100:
-            return ("%s%s" % (ltext[:-1], rtext), lnum + rnum)
-        if lnum == 7 and rnum == 100:
-            return ("%s%s" % (ltext[:-1], rtext), lnum + rnum)
+       
         if lnum == 8 and rnum == 100:
             return ("%s%s" % (ltext[:-2], rtext), lnum + rnum)
-        if lnum == 9 and rnum == 100:
-            return ("%s%s" % (ltext[:-1], rtext), lnum + rnum)
+        
+        
 
-        if lnum == 1 and rnum == 1000:
-            ltext = "ألف"
-            rtext = ""
-            return ("%s%s" % (ltext, rtext), lnum + rnum)
-        if lnum == 2 and rnum == 1000:
-            ltext = "ألفان"
-            rtext = ""
-            return ("%s%s" % (ltext, rtext), lnum + rnum)
-
-        if lnum <= 9 and lnum >= 3 and rnum == 1000:
-
+        if lnum <= 10 and lnum >= 3 and rnum == 1000:
             rtext = "ألاف"
             return ("%s%s" % (ltext, rtext), lnum + rnum)
+        if lnum <= 10 and lnum >= 3 and rnum == 1000000:
+            rtext = " ملايين "
+            return ("%s%s" % (ltext, rtext), lnum + rnum)
+	if lnum <= 10 and lnum >= 3 and rnum == 1000000000:
+            rtext = " مليارت "
+            return ("%s%s" % (ltext, rtext), lnum + rnum)
+
+
 
 
 
@@ -132,6 +126,7 @@ class Num2Word_AR(lang_EU.Num2Word_EU):
             return ("%s و %s" % (ltext, rtext), lnum + rnum)
         elif rnum > lnum:
             return ("%s %s" % (ltext, rtext), lnum * rnum)
+
         return ("%s و %s" % (ltext, rtext), lnum + rnum)
 
 
