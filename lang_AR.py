@@ -17,7 +17,9 @@
 
 from __future__ import division, unicode_literals
 from . import lang_EU
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 
