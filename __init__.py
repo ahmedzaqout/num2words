@@ -50,7 +50,6 @@ CONVERTER_CLASSES = {
     'dk': lang_DK.Num2Word_DK(),
     'pt_BR': lang_PT_BR.Num2Word_PT_BR(),
     'ar': lang_AR.Num2Word_AR(),
-
 }
 
 def num2words(number, ordinal=False, lang='en'):
